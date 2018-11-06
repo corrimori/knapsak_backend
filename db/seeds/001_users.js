@@ -52,7 +52,6 @@ exports.seed = function(knex, Promise) {
 
     // reset the table that tracks the auto-incrementing number
     .then(() =>
-      const tablename = 'users'
       knex.raw(
         `SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))`
       )

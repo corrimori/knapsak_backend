@@ -9,15 +9,15 @@ if (process.env.PORT !== 'test') app.use(morgan('dev'))
 app.use(bodyParser.json)
 app.use(cors())
 
-// for static images
-app.use(express.static(path.resolve('./public')));
-app.use('/images',express.static(path.resolve('./public')));
-
 app.all('*', (req, res, next) => res.sendStatus(404))
 
 app.use(err, req, res, next) => {
   res.status(err.status).json(err)
 }
+
+// for static images
+app.use(express.static(path.resolve('./public')));
+app.use('/images',express.static(path.resolve('./public')));
 
 if (process.env.PORT !== 'test') {
   app.listen(port, () => {
