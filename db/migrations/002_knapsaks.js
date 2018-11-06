@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary
     table.string('description').notNullable()
     table.integer('user_id').references('users.id').onDelete('CASCADE')
-    table.timestamp(true, true)
+    table.timestamps(true, true)
   })
 }
 

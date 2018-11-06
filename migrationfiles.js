@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.string('lastName').notNullable()
     table.string('email').notNullable()
     table.text('password').notNullable()
-    table.timestamp(true, true)
+    table.timestamps(true, true)
   })
 }
 
@@ -22,7 +22,7 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary
     table.string('description').notNullable()
     table.foreign('user_id').references('users.id').onDelete('CASCADE')
-    table.timestamp(true, true)
+    table.timestamps(true, true)
   })
 }
 
@@ -39,7 +39,7 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary
     table.string('name').notNullable()
     table.text('itemImage').notNullable()
-    table.timestamp(true, true)
+    table.timestamps(true, true)
   })
 }
 
@@ -57,7 +57,7 @@ exports.up = function(knex, Promise) {
     table.foreign('knapsak_id').references('knapsaks.id').onDelete('CASCADE')
     table.foreign('item_id').references('items.id').onDelete('CASCADE')
     table.integer('quantity')
-    table.timestamp(true, true)
+    table.timestamps(true, true)
   })
 }
 

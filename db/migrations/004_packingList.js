@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.integer('knapsak_id').references('knapsaks.id').onDelete('CASCADE')
     table.integer('item_id').references('items.id').onDelete('CASCADE')
     table.integer('quantity')
-    table.timestamp(true, true)
+    table.timestamps(true, true)
   })
 }
 
