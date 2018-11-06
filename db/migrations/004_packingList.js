@@ -20,3 +20,14 @@ exports.down = function(knex, Promise) {
 // on delete CASCADE -
 //
 // column "user_id" referenced in foreign key constraint does not exist
+
+
+// example of knex for foreign key
+// exports.up = (knex) => {
+//   return knex.schema.createTable('cocktails_ingredients', table => {
+//     table.integer('cocktail_id').notNullable()
+//     table.foreign('cocktail_id').references('id').inTable('cocktails')
+//     table.integer('ingredient_id').notNullable()
+//     table.foreign('ingredient_id').references('id').inTable('ingredients')
+//   })
+// }
