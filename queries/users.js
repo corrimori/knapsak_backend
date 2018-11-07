@@ -49,8 +49,6 @@ deleteUserById = (id) => {
     })
 }
 
-
-
 module.exports = {
   getAllUsers,
   getUserById,

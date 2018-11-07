@@ -12,8 +12,11 @@ app.use(cors())
 const userRoutes = require('./src/routes/users.js')
 app.use('/users', userRoutes)
 
-// const knapsakRoutes = require('./src/routes/knapsaks.js')
-// app.use('/knapsaks', knapsakRoutes)
+const knapsakRoutes = require('./src/routes/knapsaks.js')
+app.use('/knapsaks', knapsakRoutes)
+
+// const itemsRoutes = require('./src/routes/items.js')
+// app.use('/items', itemsRoutes)
 
 app.all('*', (req, res, next) => res.sendStatus(404))
 
