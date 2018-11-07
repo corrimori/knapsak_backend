@@ -1,13 +1,11 @@
-// const express = require('express')
-// const router = express.Router()
-// const ctrl = require('../controllers/items')
-// // const ctrlTags = require('../controllers/tags')
-//
-//
-// router.get('/', ctrl.getAllUsers)
-// router.get('/:id', ctrl.getUserById)
-// router.post('/', ctrl.createUser)
-// router.put('/:id', ctrl.updateUser)
-// router.delete('/:id', ctrl.deleteUserById)
-//
-// module.exports = router
+const express = require('express')
+const router = express.Router()
+const ctrlItems = require('../controllers/items')
+
+router.get('/', ctrlItems.getAllItems)
+router.get('/:id', ctrlItems.getItemById)
+// router.post('/', ctrlItems.createItem)
+// router.put('/:id', ctrlItems.updateItem)
+// router.delete('/:id', ctrlItems.deleteItemById)
+
+module.exports = router

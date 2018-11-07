@@ -1,7 +1,5 @@
 const model = require('../models/users')
 
-// const getAllUsers = (req, res, next) => {
-
 const getAllUsers = (req, res, next) => {
   console.log('in get all users controller +++++++++++++++++');
   let promise = model.getAllUsers()
