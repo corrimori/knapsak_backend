@@ -13,7 +13,7 @@ const getAllItems = (req, res, next) => {
 }
 
 const getItemById = (req, res, next) => {
-  console.log('in get items controllers++++++++++++++++++');
+  console.log('in get items controllers+++++++++++++');
   let id = req.params.id
   let promise = model.getItemById(id)
 
@@ -26,49 +26,49 @@ const getItemById = (req, res, next) => {
   })
 }
 
-// const createItem = (req, res, next) => {
-//   console.log(req.body);
-//   let promise = model.createItem(req.body)
-//
-//   promise.then(result => {
-//     return result.error ? next(result) : res.status(200).json(result)
-//   })
-//
-//   promise.catch(error => {
-//     next(error)
-//   })
-// }
-//
-// updateItem = (req, res, next) => {
-//   let id = req.params.id
-//   let promise = model.updateItem(id, req.body)
-//
-//   promise.then(result => {
-//     return result.error ? next(result) : res.status(200).json(result)
-//   })
-//
-//   promise.catch(error => {
-//     next(error)
-//   })
-// }
-//
-// deleteItemById = (req, res, next) => {
-//   let id = req.params.id
-//   let promise = model.deleteItemById(id)
-//
-//   promise.then(result => {
-//     return result.error ? next(result) : res.status(204).json(result)
-//   })
-//
-//   promise.catch(error => {
-//     next(error)
-//   })
-// }
+const createItem = (req, res, next) => {
+  console.log(req.body);
+  let promise = model.createItem(req.body)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+
+  promise.catch(error => {
+    next(error)
+  })
+}
+
+const updateItem = (req, res, next) => {
+  let id = req.params.id
+  let promise = model.updateItem(id, req.body)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+
+  promise.catch(error => {
+    next(error)
+  })
+}
+
+const deleteItemById = (req, res, next) => {
+  let id = req.params.id
+  let promise = model.deleteItemById(id)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(204).json(result)
+  })
+
+  promise.catch(error => {
+    next(error)
+  })
+}
 
 module.exports = {
   getAllItems,
-  getItemById
-  // createItem,
-  // updateItem,
-  // deleteItemById
+  getItemById,
+  createItem,
+  updateItem,
+  deleteItemById
 }

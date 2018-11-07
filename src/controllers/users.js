@@ -40,7 +40,7 @@ const createUser = (req, res, next) => {
   })
 }
 
-updateUser = (req, res, next) => {
+const updateUser = (req, res, next) => {
   let id = req.params.id
   let promise = model.updateUser(id, req.body)
 
@@ -53,7 +53,7 @@ updateUser = (req, res, next) => {
   })
 }
 
-deleteUserById = (req, res, next) => {
+const deleteUserById = (req, res, next) => {
   let id = req.params.id
   let promise = model.deleteUserById(id)
 
