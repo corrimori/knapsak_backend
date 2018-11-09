@@ -20,6 +20,11 @@ exports.seed = function(knex, Promise) {
           description: 'weekend at grandparents',
           user_id: 6
         },
+        {
+          id: 4,
+          description: 'overnight at beach',
+          user_id: 2
+        },
       ])
     })
     .then(() =>

@@ -3,7 +3,7 @@ const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8010
 
 if (process.env.PORT !== 'test') app.use(morgan('dev'))
 app.use(bodyParser.json())
@@ -17,6 +17,10 @@ app.use('/knapsaks', knapsakRoutes)
 
 const itemRoutes = require('./src/routes/items.js')
 app.use('/items', itemRoutes)
+
+const knapsakItemsRoutes = require('./src/routes/knapsakItems.js')
+app.use('/knapsakItems', knapsakItemsRoutes)
+
 
 app.all('*', (req, res, next) => res.sendStatus(404))
 
