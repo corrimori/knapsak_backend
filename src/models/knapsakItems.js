@@ -1,7 +1,8 @@
-const itemsQuery = require('../../queries/items')
+const ksItmQuery = require('../../queries/knapsakItems')
 
-const getAllKnapsakItems = () => {
-  items = itemsQuery.getAllKnapsakItems()
+const getAllKnapsakItems = (knapsakId) => {
+  console.log('knapsak models');
+  let items = ksItmQuery.getAllKnapsakItems(knapsakId)
 
   return items.then(result => {
     return result.length < 1
@@ -10,19 +11,8 @@ const getAllKnapsakItems = () => {
   })
 }
 
-const getKnapsakItemById = (id) => {
-  console.log('in get knapsak-items models #############');
-  item = itemsQuery.getKnapsakItemById(id)
-
-  return item.then(result => {
-    return !result
-      ? { error: 'error retreiving item', status: 404 }
-      : result
-  })
-}
-
-const createKnapsakItem = (body) => {
-  item = itemsQuery.createKnapsakItem(body)
+const addItemToKnapsak = (body) => {
+  item = ksItmQuery.addItemToKnapsak(body)
 
   return item.then(result => {
     return !result
@@ -32,7 +22,7 @@ const createKnapsakItem = (body) => {
 }
 
 const updateKnapsakItem = (id, body) => {
-  item = itemsQuery.updateKnapsakItem(id, body)
+  item = ksItmQuery.updateKnapsakItem(id, body)
 
   return item.then(result => {
     return !result
@@ -41,8 +31,8 @@ const updateKnapsakItem = (id, body) => {
   })
 }
 
-const deleteKnapsakItemById = (id) => {
-  item = itemsQuery.deleteKnapsakItemById(id)
+const deleteKnapsakItem = (id) => {
+  item = ksItmQuery.deleteKnapsakItem(id)
 
   return item.then(result => {
     return !result
@@ -53,8 +43,7 @@ const deleteKnapsakItemById = (id) => {
 
 module.exports = {
   getAllKnapsakItems,
-  getKnapsakItemById,
-  createKnapsakItem,
+  addItemToKnapsak,
   updateKnapsakItem,
-  deleteKnapsakItemById
+  deleteKnapsakItem
 }

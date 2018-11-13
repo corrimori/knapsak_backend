@@ -1,17 +1,15 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('knapsakItems', table => {
+  return knex.schema.createTable('knapsak_items', table => {
     table.increments('id').primary
-    table.integer('knapsak_id').notNullable()
-    table.foreign('knapsak_id').references('id').inTable('knapsaks').onDelete('CASCADE')
-    table.integer('item_id').notNullable()
-    table.foreign('item_id').references('id').inTable('items').onDelete('CASCADE')
+    table.integer('knapsak_id').references('knapsaks.id').onDelete('CASCADE')
+    table.integer('item_id').references('items.id').onDelete('CASCADE')
     table.integer('quantity')
     table.timestamps(true, true)
   })
 }
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('knapsakItems')
+  return knex.schema.dropTable('knapsak_items')
 }
 
 // ERROR in console ...
@@ -30,5 +28,19 @@ exports.down = function(knex, Promise) {
 //     ALTERNATIVE IN 1 LINE =========================
 //     table.integer('item_id').references('items.id').onDelete('CASCADE')
 
+//   })
+// }
+
+
+// code not working ================
+// exports.up = function(knex, Promise) {
+//   return knex.schema.createTable('knapsak_items', table => {
+//     table.increments('id').primary
+//     table.integer('knapsak_id').notNullable()
+//     table.foreign('knapsak_id').references('id').inTable('knapsaks').onDelete('CASCADE')
+//     table.integer('item_id').notNullable()
+//     table.foreign('item_id').references('id').inTable('items').onDelete('CASCADE')
+//     table.integer('quantity')
+//     table.timestamps(true, true)
 //   })
 // }

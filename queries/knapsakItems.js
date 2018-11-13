@@ -1,35 +1,23 @@
 const knex = require('./db')
 
-const getAllKnapsakItems = () => {
-  return knex('knapsakItems')
-  // return knex('knapsakItems').orderBy('created_at', 'desc')
+// query to get a list of all item in a knapsak
+const getAllKnapsakItems = (knapsakId) => {
+  return knex('knapsak_items')
+  .where('knapsak_id', knapsakId)
+  .join('items', 'items.id', '=', 'knapsak_items.item_id')
+  .join('knapsaks', 'knapsaks.id', '=', 'knapsak_items.knapsak_id')
+  .orderBy('knapsaks.description', 'ASC')
 }
 
-
-const fetchOrders = (restaurantId) => {
-    // return innerJoin results from orders, items, restaurants, users tables
-    return knex('orders_items')
-        .join('orders', 'orders.id', '=', 'orders_items.order_id')
-        .join('items', 'items.id', '=', 'orders_items.item_id')
-        .join('restaurants', 'restaurants.id', '=', 'orders.restaurant_id')
-        .join('users', 'users.id', '=', 'orders.user_id')
-        // Select certain columns and generate order report
-        .select('users.name as userName','orders.id as orderId','restaurants.name as restaurantName', 'items.name as itemName', 'items.descriptions as itemDescriptions','items.price as itemPrice','orders_items.quantity as itemQuantity')
-        .where('orders.restaurant_id', restaurantId)
-        // Remove any duplicate data
-        .distinct()
-
-// get knapsakItems for knapsak with id
-const getKnapsakItemById = (knapsakId) => {
-  // return innerJoin results from knapsak, items
-  return knex('knapsak_items').
-
-  where('knapsakId', id)
-}
-
-const createKnapsakItem = (body) => {
-  return knex('knapsakItems')
-  .insert(body).returning('*')
+// query to add an item to a knapsak
+const addItemToKnapsak = (body, knapsakId) => {
+  return knex('knapsak_items')
+  console.log('body-addKpsk>>', body)
+  .insert({
+    knapsak_id: knapsak_id,
+    item_id: body.item_id,
+    quantity: body.quantity
+  })
   .catch((err) => {
     console.error(err)
     knex.destroy()
@@ -37,15 +25,15 @@ const createKnapsakItem = (body) => {
   })
 }
 
-updateKnapsakItem = (id, body) => {
-  return knex('knapsakItems')
+// query to update an item in a knapsak
+updateKnapsakItem = (body, knapsakId, id) => {
+  return knex('knapsak_items')
+  .where('knapsak_id', knapsakId)
   .where('id', id)
-  // .update(body)
   .update({
-    firstName: body.firstName,
-    lastName: body.lastName,
-    email: body.email,
-    password: body.password
+    knapsak_id: knapsakId,
+    item_id: body.item_id,
+    quantity: body.quantity
   })
   .returning('*')
   .catch((err) => {
@@ -55,8 +43,10 @@ updateKnapsakItem = (id, body) => {
   })
 }
 
-deleteKnapsakItemById = (id) => {
-  return knex('knapsakItems')
+// query to delete an item in a knapsak
+deleteKnapsakItem = (id, knapsakId) => {
+  return knex('knapsak_items')
+    .where('knapsak_id', knapsakId)
     .where('id', id)
     .del()
     .returning('*')
@@ -69,8 +59,7 @@ deleteKnapsakItemById = (id) => {
 
 module.exports = {
   getAllKnapsakItems,
-  getKnapsakItemById,
-  createKnapsakItem,
+  addItemToKnapsak,
   updateKnapsakItem,
-  deleteKnapsakItemById
+  deleteKnapsakItem
 }

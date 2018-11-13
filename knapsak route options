@@ -1,0 +1,101 @@
+GET /knapsacks/123/items
+
+POST /knapsacks/123/items (how to add one)
+
+DELETE /knapsaksitems/345
+
+POST /knapsakitems/245
+
+
+==================
+
+/*
+/ the way it is presently (not ideal)
+/knapsakitems/1/2
+*/
+
+
+/*
+/ ideal way to do the routes
+router.put('/:id', ctrlKnapItms.updateKnapsakItem)
+router.delete('/:id', ctrlKnapItms.deleteKnapsakItem)
+*/
+
+/*
+/ hierarchy of how RESTful routes should look
+/knapsacks
+/knapsacks/123
+/knapsacks/123/items
+
+/knapsackitems/123
+
+======
+/items/456
+/items/356/grandchildren
+*/
+
+/*
+/knapsakitems/123
+*/
+
+================================================
+================================================
+
+Normally Don't do this
+
+POST /knapsak_items
+GET /knapsak_items/123
+
+=====
+
+Option 1
+
+GET /knapsak/123
+Response:
+{
+  id: 123,
+  description: ''
+  items: [
+    {
+      name: socks
+      quantity: 2
+    }
+    {
+      name: t-shirt
+      quantity: 2
+    }
+  ]
+}
+
+=====
+
+Option 2
+
+GET /knapsaks
+[
+  { id: 123, desc, }
+]
+
+GET /knapsaks/123
+Response:
+{
+  id: 123,
+  description: ''
+}
+
+GET /knapsaks/123/items
+Response:
+[
+{
+  name: socks
+  quantity: 2
+}
+{
+  name: t-shirt
+  quantity: 2
+}
+]
+
+
+
+=====

@@ -1,7 +1,9 @@
 const model = require('../models/knapsakItems')
 
 const getAllKnapsakItems = (req, res, next) => {
-  let promise = model.getAllKnapsakItems()
+  console.log('knapsak controller');
+  let { knapsakId } = req.params
+  let promise = model.getAllKnapsakItems(knapsakId)
 
   promise.then(result => {
     return result.error ? next(result) : res.status(200).json(result)
@@ -12,23 +14,9 @@ const getAllKnapsakItems = (req, res, next) => {
   })
 }
 
-const getKnapsakItemById = (req, res, next) => {
-  console.log('in get knapsakItems controllers+++++++++++++');
-  let id = req.params.id
-  let promise = model.getKnapsakItemById(id)
-
-  promise.then(result => {
-    return result.error ? next(result) : res.status(200).json(result)
-  })
-
-  promise.catch(error => {
-    next(error)
-  })
-}
-
-const createKnapsakItem = (req, res, next) => {
+const addItemToKnapsak = (req, res, next) => {
   console.log(req.body);
-  let promise = model.createKnapsakItem(req.body)
+  let promise = model.addItemToKnapsak(req.body)
 
   promise.then(result => {
     return result.error ? next(result) : res.status(200).json(result)
@@ -52,9 +40,9 @@ const updateKnapsakItem = (req, res, next) => {
   })
 }
 
-const deleteKnapsakItemById = (req, res, next) => {
+const deleteKnapsakItem = (req, res, next) => {
   let id = req.params.id
-  let promise = model.deleteKnapsakItemById(id)
+  let promise = model.deleteKnapsakItem(id)
 
   promise.then(result => {
     return result.error ? next(result) : res.status(204).json(result)
@@ -67,8 +55,7 @@ const deleteKnapsakItemById = (req, res, next) => {
 
 module.exports = {
   getAllKnapsakItems,
-  getKnapsakItemById,
-  createKnapsakItem,
+  addItemToKnapsak,
   updateKnapsakItem,
-  deleteKnapsakItemById
+  deleteKnapsakItem
 }
