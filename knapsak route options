@@ -6,8 +6,29 @@ DELETE /knapsaksitems/345
 
 POST /knapsakitems/245
 
-
 ==================
+/*
+router.put('/:id', ctrlKnapItms.updateKnapsakItem)
+router.delete('/:id', ctrlKnapItms.deleteKnapsakItem)
+*/
+
+/*
+/knapsacks
+/knapsacks/123
+/knapsacks/123/items
+
+/knapsackitems/123
+
+======
+/items/456
+/items/356/grandchildren
+*/
+
+/*
+/knapsakitems/123
+*/
+
+===================
 
 /*
 / the way it is presently (not ideal)

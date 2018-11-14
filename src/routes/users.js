@@ -10,4 +10,8 @@ router.post('/', ctrl.createUser)
 router.put('/:id', ctrl.updateUser)
 router.delete('/:id', ctrl.deleteUserById)
 
+// users/1/knapsaks
+// get all knapsaks belonging to a user
+router.get('/:id/knapsaks', ctrl.getAllUsersKnapsaks)
+
 module.exports = router

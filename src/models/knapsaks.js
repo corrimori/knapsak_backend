@@ -52,10 +52,33 @@ const deleteKnapsakById = (id) => {
   })
 }
 
+const getAllKnapsakItems = (id) => {
+  console.log('knapsak models');
+  let items = knapsaksQuery.getAllKnapsakItems(id)
+
+  return items.then(result => {
+    return result.length < 1
+      ? { error: 'error retreiving items', status: 404 }
+      : result
+  })
+}
+
+const addItemToKnapsak = (body) => {
+  let item = knapsaksQuery.addItemToKnapsak(body)
+
+  return item.then(result => {
+    return !result
+      ? { error: 'error creating item', status: 500 }
+      : result
+  })
+}
+
 module.exports = {
   getAllKnapsaks,
   getKnapsakById,
   createKnapsak,
   updateKnapsak,
-  deleteKnapsakById
+  deleteKnapsakById,
+  getAllKnapsakItems,
+  addItemToKnapsak
 }

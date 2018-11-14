@@ -49,10 +49,18 @@ deleteUserById = (id) => {
     })
 }
 
+// query to all knapsaks belonging to a user
+const getAllUsersKnapsaks = (id) => {
+  console.log('in user-knapsak queries...')
+  return knex('knapsaks')
+  .where('user_id', id)
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
-  deleteUserById
+  deleteUserById,
+  getAllUsersKnapsaks,
 }

@@ -66,10 +66,26 @@ const deleteUserById = (req, res, next) => {
   })
 }
 
+const getAllUsersKnapsaks = (req, res, next) => {
+  console.log('users controller ALL knapsaks +++++++++++++++++');
+  console.log('req.params id>>>', req.params.id)
+  let { id } = req.params
+  let promise = model.getAllUsersKnapsaks(id)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
-  deleteUserById
+  deleteUserById,
+  getAllUsersKnapsaks,
 }

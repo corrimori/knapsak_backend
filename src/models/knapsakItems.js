@@ -1,26 +1,5 @@
 const ksItmQuery = require('../../queries/knapsakItems')
 
-const getAllKnapsakItems = (knapsakId) => {
-  console.log('knapsak models');
-  let items = ksItmQuery.getAllKnapsakItems(knapsakId)
-
-  return items.then(result => {
-    return result.length < 1
-      ? { error: 'error retreiving items', status: 404 }
-      : result
-  })
-}
-
-const addItemToKnapsak = (body) => {
-  item = ksItmQuery.addItemToKnapsak(body)
-
-  return item.then(result => {
-    return !result
-      ? { error: 'error creating item', status: 500 }
-      : result
-  })
-}
-
 const updateKnapsakItem = (id, body) => {
   item = ksItmQuery.updateKnapsakItem(id, body)
 
@@ -42,8 +21,6 @@ const deleteKnapsakItem = (id) => {
 }
 
 module.exports = {
-  getAllKnapsakItems,
-  addItemToKnapsak,
   updateKnapsakItem,
   deleteKnapsakItem
 }

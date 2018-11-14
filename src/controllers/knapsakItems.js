@@ -1,31 +1,10 @@
 const model = require('../models/knapsakItems')
 
-const getAllKnapsakItems = (req, res, next) => {
-  console.log('knapsak controller');
-  let { knapsakId } = req.params
-  let promise = model.getAllKnapsakItems(knapsakId)
-
-  promise.then(result => {
-    return result.error ? next(result) : res.status(200).json(result)
-  })
-
-  promise.catch(error => {
-    next(error)
-  })
-}
-
-const addItemToKnapsak = (req, res, next) => {
-  console.log(req.body);
-  let promise = model.addItemToKnapsak(req.body)
-
-  promise.then(result => {
-    return result.error ? next(result) : res.status(200).json(result)
-  })
-
-  promise.catch(error => {
-    next(error)
-  })
-}
+// const getAllKnapsakItems = (req, res, next) => {
+//   console.log('knapsak controller');
+//   console.log('req.params id>>>', req.params.id)
+//   let { knapsakId } = req.params
+//   let promise = model.getAllKnapsakItems(knapsakId)
 
 const updateKnapsakItem = (req, res, next) => {
   let id = req.params.id
@@ -54,8 +33,6 @@ const deleteKnapsakItem = (req, res, next) => {
 }
 
 module.exports = {
-  getAllKnapsakItems,
-  addItemToKnapsak,
   updateKnapsakItem,
   deleteKnapsakItem
 }
