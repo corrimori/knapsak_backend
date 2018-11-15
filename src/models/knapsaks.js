@@ -73,6 +73,28 @@ const addItemToKnapsak = (body) => {
   })
 }
 
+const updateQuantity = (id, body) => {
+  console.log('in update Quantity ...')
+  let item = knapsaksQuery.updateQuantity(id, itemId, body)
+  console.log('update Quantity item---->>', item);
+
+  return item.then(result => {
+    return !result
+      ? { error: 'error updating item', status: 500 }
+      : result
+  })
+}
+
+const deleteItemFromKnapsak = (id) => {
+  item = knapsaksQuery.deleteItemFromKnapsak(id)
+
+  return item.then(result => {
+    return !result
+      ? { error: 'error deleting item', status: 500 }
+      : result
+  })
+}
+
 module.exports = {
   getAllKnapsaks,
   getKnapsakById,
@@ -80,5 +102,7 @@ module.exports = {
   updateKnapsak,
   deleteKnapsakById,
   getAllKnapsakItems,
-  addItemToKnapsak
+  addItemToKnapsak,
+  updateQuantity,
+  deleteItemFromKnapsak
 }

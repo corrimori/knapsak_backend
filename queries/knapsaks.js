@@ -72,6 +72,38 @@ const addItemToKnapsak = (body) => {
   })
 }
 
+// query to update an item in a knapsak
+updateQuantity = (id, itemId, body) => {
+  return knex('knapsak_items')
+  .where('id', id)
+  .where('item_id', itemId)
+  .update({
+    knapsak_id: id,
+    item_id: body.item_id,
+    quantity: body.quantity
+  })
+  .returning('*')
+  .catch((err) => {
+    console.error(err)
+    knex.destroy()
+    process.exit(1)
+  })
+}
+
+// query to delete an item in a knapsak
+deleteItemFromKnapsak = (id, knapsakId) => {
+  return knex('knapsak_items')
+    .where('knapsak_id', knapsakId)
+    .where('id', id)
+    .del()
+    .returning('*')
+    .catch((err) => {
+      console.error(err)
+      knex.destroy()
+      process.exit(1)
+    })
+}
+
 module.exports = {
   getAllKnapsaks,
   getKnapsakById,
@@ -79,5 +111,7 @@ module.exports = {
   updateKnapsak,
   deleteKnapsakById,
   getAllKnapsakItems,
-  addItemToKnapsak
+  addItemToKnapsak,
+  updateQuantity,
+  deleteItemFromKnapsak
 }

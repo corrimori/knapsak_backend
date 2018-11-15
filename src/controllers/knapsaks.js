@@ -93,6 +93,34 @@ const addItemToKnapsak = (req, res, next) => {
   })
 }
 
+const updateQuantity = (req, res, next) => {
+  let id = req.params.id
+  let itemId = req.params.itemId
+  console.log('req.params.itemId>>>', req.params.itemId);
+  let promise = model.updateQuantity(id, itemId, req.body)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+
+  promise.catch(error => {
+    next(error)
+  })
+}
+
+const deleteItemFromKnapsak = (req, res, next) => {
+  let id = req.params.id
+  let promise = model.deleteItemFromKnapsak(id)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(204).json(result)
+  })
+
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   getAllKnapsaks,
   getKnapsakById,
@@ -100,5 +128,7 @@ module.exports = {
   updateKnapsak,
   deleteKnapsakById,
   getAllKnapsakItems,
-  addItemToKnapsak
+  addItemToKnapsak,
+  updateQuantity,
+  deleteItemFromKnapsak
 }

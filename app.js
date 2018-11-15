@@ -18,10 +18,6 @@ app.use('/knapsaks', knapsakRoutes)
 const itemRoutes = require('./src/routes/items.js')
 app.use('/items', itemRoutes)
 
-const knapsakItemsRoutes = require('./src/routes/knapsakItems.js')
-app.use('/knapsakItems', knapsakItemsRoutes)
-
-
 app.all('*', (req, res, next) => res.sendStatus(404))
 
 app.use((err, req, res, next) => {

@@ -9,22 +9,22 @@ router.post('/', ctrlKnapsaks.createKnapsak)
 router.put('/:id', ctrlKnapsaks.updateKnapsak)
 router.delete('/:id', ctrlKnapsaks.deleteKnapsakById)
 
-//  was - knapsakItems/
-// knapsaks/1/items
-// knapsaks/(knapsakId)/items
 // get all items in a knapsak
-// ** knapsak/1/items/2
-
+// ** knapsak/1/items
 router.get('/:id/items', ctrlKnapsaks.getAllKnapsakItems)
 router.post('/:id/items', ctrlKnapsaks.addItemToKnapsak)
 
-
-// update an item in a knapsak
+// update an item qty in a knapsak
 // knapsaks/1/items/1
-// router.post('/:id/items/:itemId', ctrlKnapsaks.addItemToKnapsak)
-
-
-// router.get('/:knapsakId/items', ctrlKnapItms.getAllKnapsakItems)
-// router.post('/:knapsakId/items', ctrlKnapItms.addItemToKnapsak)
+router.put('/:id/items/:itemId', ctrlKnapsaks.updateQuantity)
+// delete an item in a knapsak
+router.delete('/:id/items/:itemId', ctrlKnapsaks.deleteItemFromKnapsak)
 
 module.exports = router
+
+
+
+
+//  was - knapsakItems/, changed to knapsak/1
+// knapsaks/1/items
+// knapsaks/(knapsakId)/items
