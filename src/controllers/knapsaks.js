@@ -38,7 +38,7 @@ const createKnapsak = (req, res, next) => {
   })
 }
 
-updateKnapsak = (req, res, next) => {
+const updateKnapsak = (req, res, next) => {
   let id = req.params.id
   let promise = model.updateKnapsak(id, req.body)
   console.log('knapsak body>>', body);
@@ -52,7 +52,7 @@ updateKnapsak = (req, res, next) => {
   })
 }
 
-deleteKnapsakById = (req, res, next) => {
+const deleteKnapsakById = (req, res, next) => {
   let id = req.params.id
   let promise = model.deleteKnapsakById(id)
 
@@ -66,7 +66,7 @@ deleteKnapsakById = (req, res, next) => {
 }
 
 const getAllKnapsakItems = (req, res, next) => {
-  console.log('knapsak controller');
+  console.log('all ks items controller +++++++++++++');
   console.log('req.params id>>>', req.params.id)
   let { id } = req.params
   let promise = model.getAllKnapsakItems(id)
@@ -110,6 +110,8 @@ const updateQuantity = (req, res, next) => {
 
 const deleteItemFromKnapsak = (req, res, next) => {
   let id = req.params.id
+  let itemId = req.params.itemId
+  console.log('in delete items ... body>>>>>>', req.body)
   let promise = model.deleteItemFromKnapsak(id)
 
   promise.then(result => {

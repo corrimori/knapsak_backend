@@ -53,7 +53,8 @@ const deleteKnapsakById = (id) => {
 }
 
 const getAllKnapsakItems = (id) => {
-  console.log('knapsak models');
+  console.log('ks items models +++++++++++++');
+  console.log('id>>', id);
   let items = knapsaksQuery.getAllKnapsakItems(id)
 
   return items.then(result => {
@@ -85,8 +86,9 @@ const updateQuantity = (id, body) => {
   })
 }
 
+// id from knapsak_items
 const deleteItemFromKnapsak = (id) => {
-  item = knapsaksQuery.deleteItemFromKnapsak(id)
+  let item = knapsaksQuery.deleteItemFromKnapsak(id)
 
   return item.then(result => {
     return !result

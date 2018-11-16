@@ -47,19 +47,31 @@ deleteKnapsakById = (id) => {
     })
 }
 
-// query to get a list of all item in a knapsak
+// query to gets all items in a knapsak
 const getAllKnapsakItems = (id) => {
-  console.log('in queries...')
+  console.log('in ks items queries ++++++++++++')
+  console.log('knapsak id>>', id);
   return knex('knapsak_items')
-  .where('knapsak_id', id)
+  .select('knapsaks.id as knapsakId', 'items.id as itemId', 'quantity', 'items.name as name', 'items.itemImage as itemImage')
   .join('items', 'items.id', '=', 'knapsak_items.item_id')
   .join('knapsaks', 'knapsaks.id', '=', 'knapsak_items.knapsak_id')
-  .orderBy('knapsaks.description', 'ASC')
+  .where('knapsaks.id', id)
+  // (column name, val)
+  .distinct()
 }
 
+// return knex('videos')
+//   .select(knex.raw('videos.*, users.name as owner_name'))
+//   .join('users', 'users.id', 'videos.owner_id')
+//   .where('videos.id', videoId)
+//   .first()
+
+// ********************************
+// need to check if already exsists in knapsak
 // query to add an item to a knapsak
 const addItemToKnapsak = (body) => {
   return knex('knapsak_items')
+  // knapsak_items.find( updateQuantity ) else == 'undefined' -- add item
   .insert({
     knapsak_id: body.knapsak_id,
     item_id: body.item_id,
@@ -73,7 +85,7 @@ const addItemToKnapsak = (body) => {
 }
 
 // query to update an item in a knapsak
-updateQuantity = (id, itemId, body) => {
+const updateQuantity = (id, itemId, body) => {
   return knex('knapsak_items')
   .where('id', id)
   .where('item_id', itemId)
@@ -91,9 +103,9 @@ updateQuantity = (id, itemId, body) => {
 }
 
 // query to delete an item in a knapsak
-deleteItemFromKnapsak = (id, knapsakId) => {
+const deleteItemFromKnapsak = (id) => {
   return knex('knapsak_items')
-    .where('knapsak_id', knapsakId)
+    // .where('knapsak_id', knapsakId)
     .where('id', id)
     .del()
     .returning('*')

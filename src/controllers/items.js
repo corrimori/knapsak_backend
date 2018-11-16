@@ -13,7 +13,6 @@ const getAllItems = (req, res, next) => {
 }
 
 const getItemById = (req, res, next) => {
-  console.log('in get items controllers+++++++++++++');
   let id = req.params.id
   let promise = model.getItemById(id)
 
