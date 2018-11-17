@@ -12,13 +12,18 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 2,
-          description: '5 day holiday',
+          description: 'weekend at grandparents',
           user_id: 2
         },
         {
           id: 3,
-          description: 'weekend at grandparents',
+          description: '5 day holiday',
           user_id: 6
+        },
+        {
+          id: 4,
+          description: 'overnight at beach',
+          user_id: 2
         },
       ])
     })

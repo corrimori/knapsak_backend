@@ -47,10 +47,95 @@ deleteKnapsakById = (id) => {
     })
 }
 
+// query to gets all items in a knapsak
+const getAllKnapsakItems = (id) => {
+  console.log('in ks items queries ++++++++++++')
+  console.log('knapsak id>>', id);
+  return knex('knapsak_items')
+  .select('knapsaks.id as knapsakId', 'items.id as itemId', 'quantity', 'items.name as name', 'items.itemImage as itemImage')
+  .join('items', 'items.id', '=', 'knapsak_items.item_id')
+  .join('knapsaks', 'knapsaks.id', '=', 'knapsak_items.knapsak_id')
+  .where('knapsaks.id', id)
+  // (column name, val)
+  .distinct()
+}
+
+// return knex('videos')
+//   .select(knex.raw('videos.*, users.name as owner_name'))
+//   .join('users', 'users.id', 'videos.owner_id')
+//   .where('videos.id', videoId)
+//   .first()
+
+// ********************************
+// need to check if already exists in knapsak
+// query to add an item to a knapsak
+const addItemToKnapsak = (body) => {
+  return knex('knapsak_items')
+  // knapsak_items.find( updateQuantity ) else == 'undefined' -- add item
+  .insert({
+    knapsak_id: body.knapsak_id,
+    item_id: body.item_id,
+    quantity: body.quantity
+  }).returning('*')
+  .catch((err) => {
+    console.error(err)
+    knex.destroy()
+    process.exit(1)
+  })
+}
+
+// query to update an item in a knapsak
+const updateQuantity = (id, itemId, body) => {
+  return knex('knapsak_items')
+  .where('knapsak_id', id)
+  .where('item_id', itemId)
+  .update({
+    // knapsak_id: id,
+    // item_id: body.item_id,
+    quantity: body.quantity
+  })
+}
+
+//Query edit a specified order with details
+// const editOrder = (orderId, orderInfo) => {
+//     return knex('orders_items')
+//         .where('orders_items.order_id', orderId)
+//         .update({
+//             order_id:      orderId,
+//             item_id:       orderInfo.itemId,
+//             quantity:      orderInfo.quantity
+//         })
+//         .then(result => {
+//             //Return successful message once the entry is completed
+//             return `Your order has been updated`
+//         })
+//         .catch(err => {
+//             return err.message;
+//         })
+// }
+
+// query to delete an item in a knapsak
+const deleteItemFromKnapsak = (id) => {
+  return knex('knapsak_items')
+    // .where('knapsak_id', knapsakId)
+    .where('id', id)
+    .del()
+    .returning('*')
+    .catch((err) => {
+      console.error(err)
+      knex.destroy()
+      process.exit(1)
+    })
+}
+
 module.exports = {
   getAllKnapsaks,
   getKnapsakById,
   createKnapsak,
   updateKnapsak,
-  deleteKnapsakById
+  deleteKnapsakById,
+  getAllKnapsakItems,
+  addItemToKnapsak,
+  updateQuantity,
+  deleteItemFromKnapsak
 }

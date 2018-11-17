@@ -3,7 +3,7 @@ const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8010
 
 if (process.env.PORT !== 'test') app.use(morgan('dev'))
 app.use(bodyParser.json())

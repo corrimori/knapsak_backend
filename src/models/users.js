@@ -52,10 +52,23 @@ const deleteUserById = (id) => {
   })
 }
 
+const getAllUsersKnapsaks = (id) => {
+  console.log('in models-users get knapsaks ***************');
+  console.log('id in models>>>', id);
+  let items = usersQuery.getAllUsersKnapsaks(id)
+
+  return items.then(result => {
+    return result.length < 1
+    ? { error: 'error retreiving items', status: 404 }
+    : result
+  })
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
-  deleteUserById
+  deleteUserById,
+  getAllUsersKnapsaks,
 }
