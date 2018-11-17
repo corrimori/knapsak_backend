@@ -74,7 +74,7 @@ const addItemToKnapsak = (body) => {
   })
 }
 
-const updateQuantity = (id, body) => {
+const updateQuantity = (id, itemId, body) => {
   console.log('in update Quantity ...')
   let item = knapsaksQuery.updateQuantity(id, itemId, body)
   console.log('update Quantity item---->>', item);

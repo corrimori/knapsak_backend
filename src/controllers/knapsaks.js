@@ -97,6 +97,7 @@ const updateQuantity = (req, res, next) => {
   let id = req.params.id
   let itemId = req.params.itemId
   console.log('req.params.itemId>>>', req.params.itemId);
+  console.log('req.body>>>>>', req.body)
   let promise = model.updateQuantity(id, itemId, req.body)
 
   promise.then(result => {

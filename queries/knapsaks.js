@@ -67,7 +67,7 @@ const getAllKnapsakItems = (id) => {
 //   .first()
 
 // ********************************
-// need to check if already exsists in knapsak
+// need to check if already exists in knapsak
 // query to add an item to a knapsak
 const addItemToKnapsak = (body) => {
   return knex('knapsak_items')
@@ -87,20 +87,32 @@ const addItemToKnapsak = (body) => {
 // query to update an item in a knapsak
 const updateQuantity = (id, itemId, body) => {
   return knex('knapsak_items')
-  .where('id', id)
+  .where('knapsak_id', id)
   .where('item_id', itemId)
   .update({
-    knapsak_id: id,
-    item_id: body.item_id,
+    // knapsak_id: id,
+    // item_id: body.item_id,
     quantity: body.quantity
   })
-  .returning('*')
-  .catch((err) => {
-    console.error(err)
-    knex.destroy()
-    process.exit(1)
-  })
 }
+
+//Query edit a specified order with details
+// const editOrder = (orderId, orderInfo) => {
+//     return knex('orders_items')
+//         .where('orders_items.order_id', orderId)
+//         .update({
+//             order_id:      orderId,
+//             item_id:       orderInfo.itemId,
+//             quantity:      orderInfo.quantity
+//         })
+//         .then(result => {
+//             //Return successful message once the entry is completed
+//             return `Your order has been updated`
+//         })
+//         .catch(err => {
+//             return err.message;
+//         })
+// }
 
 // query to delete an item in a knapsak
 const deleteItemFromKnapsak = (id) => {
